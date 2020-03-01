@@ -159,11 +159,18 @@ Vector.getUnitVector = function(v) {
     validateVector(v);
 
     var mag = v.mag();
+    if (mag == 0)
+        throw "The magnitude of your vector is zero.";
+
+    console.log("updated yo");
+
     var x = v.x / mag;
     var y = v.y / mag;
     var z = v.z / mag;
-
-    return new Vector(x, y, z);
+    var normalV = new Vector(x, y, z)
+    console.log(normalV);
+    
+    return normalV;
 }
 
 /**
