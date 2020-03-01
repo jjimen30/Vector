@@ -13,7 +13,9 @@ Simply copy the following CDN to use
 ## Usage
 
 Creating: 
-`var v = new Vector(0.0, 0.0, 0.0)`
+```
+var v = new Vector(0.0, 0.0, 0.0)
+```
 creates a new vector with components at 0.0, 0.0, 0.0.
 
 
