@@ -1,3 +1,9 @@
+/**
+ * A Vector API that facilitates vector operations.
+ * 
+ * @author Jorge Jimenez
+ */
+
 var Vector = function(x, y, z = 0) {
 
     validateXY(x, y);
@@ -169,7 +175,7 @@ Vector.getUnitVector = function(v) {
     var z = v.z / mag;
     var normalV = new Vector(x, y, z)
     console.log(normalV);
-    
+
     return normalV;
 }
 
