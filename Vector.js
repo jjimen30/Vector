@@ -27,6 +27,16 @@ Vector.prototype.cross = function(v) {
 }
 
 /**
+ * Calculates the distance between this and another vector.
+ * @param  {[type]} other [description]
+ * @return {[type]}       [description]
+ */
+Vector.prototype.dist = function(other) {
+    var v = Vector.sub(this, other);
+    return v.mag();
+}
+
+/**
  * Adds a vector to this vector.
  * @param {[type]} other [description]
  */
