@@ -1,2 +1,10 @@
-# Vector
-A javaScript vector API
+## Vector
+A simple javaScript vector API.
+
+
+## How to use.
+
+You can take advantage of [jsDeliver](https://www.jsdelivr.com/) to use this API.
+Simply copy the following CDN to use
+
+`https://cdn.jsdelivr.net/gh/jjimen30/Vector/Vector.js`
