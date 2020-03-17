@@ -1,5 +1,7 @@
 /**
  * A Vector API that facilitates vector operations.
+ *
+ * @version 2.0
  * @author Jorge Jimenez
  */
 
