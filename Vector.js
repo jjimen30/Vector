@@ -1,6 +1,5 @@
 /**
  * A Vector API that facilitates vector operations.
- * 
  * @author Jorge Jimenez
  */
 
@@ -38,6 +37,7 @@ Vector.prototype.cross = function(v) {
  * @return {[type]}       [description]
  */
 Vector.prototype.dist = function(other) {
+    validateVector(other);
     var v = Vector.sub(this, other);
     return v.mag();
 }
@@ -120,19 +120,18 @@ Vector.prototype.mult = function(scalar) {
 }
 
 Vector.prototype.set = function(x, y, z = 0) {
-    var currentX = this.x;
-    var currentY = this.y;
-    var currentZ = this.z;
-
     this.x = x;
     this.y = y;
     this.z = z;
 
-    if (this.limit > 0 && this.limit < this.mag()) {
-        this.x = currentX;
-        this.y = currentY;
-        this.z = currentZ;
+    if (this.limit > 0 && this.mag() > this.limit) {
+        // this.x = currentX;
+        // this.y = currentY;
+        // this.z = currentZ;
+        this.normalize();
+        this.mult(this.limit);
     }
+
 
     return this;
 }
@@ -143,7 +142,7 @@ Vector.prototype.setLimit = function(limit) {
 }
 
 Vector.prototype.print = function() {
-	console.log("<" + this.x + ", " + this.y + ", " + this.z + ">");
+    console.log("(" + this.x + ", " + this.y + ", " + this.z + ")");
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++ S T A T I C   F U N C T I O N S +++++++++++++++++++++++++++++++
@@ -174,6 +173,7 @@ Vector.getUnitVector = function(v) {
     var y = v.y / mag;
     var z = v.z / mag;
     var normalV = new Vector(x, y, z)
+
     console.log(normalV);
 
     return normalV;
@@ -269,7 +269,7 @@ function validateArgIsNotZero(input) {
 function validateVector(v) {
     if (v == undefined)
         throw "The vector passed in is undefined.";
-    if (typeof v == Vector)
+    if (typeof v != Vector)
         throw "The argument passed is not of type Vector.";
 }
 
