@@ -2,7 +2,7 @@
 A simple javaScript vector API.
 
 
-## How to isntall
+## How to use
 
 You can take advantage of [jsDeliver](https://www.jsdelivr.com/) to use this API.
 Simply copy the following CDN to use
