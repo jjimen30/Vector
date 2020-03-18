@@ -127,13 +127,12 @@ Vector.prototype.set = function(x, y, z = 0) {
     this.z = z;
 
     if (this.limit > 0 && this.mag() > this.limit) {
-        // this.x = currentX;
-        // this.y = currentY;
-        // this.z = currentZ;
-        this.normalize();
-        this.mult(this.limit);
-    }
 
+        this.normalize();
+        this.x = this.x * this.limit;
+        this.y = this.y * this.limit;
+        this.z = this.z * this.limit;
+    }
 
     return this;
 }
