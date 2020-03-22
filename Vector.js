@@ -270,7 +270,7 @@ function validateArgIsNotZero(input) {
 function validateVector(v) {
     if (v == undefined)
         throw "The vector passed in is undefined.";
-    if (typeof v != Vector)
+    if (v instanceof Vector)
         throw "The argument passed is not of type Vector.";
 }
 
