@@ -1,5 +1,5 @@
 /**
- * A three demensional vector API. Supplies all the vector operations. 
+ * A three demensional vector API. Represented as a row vector, it supplies all the vector operations. 
  *
  * @version v12.10.0
  * @author Jorge Jimenez
@@ -8,7 +8,7 @@ var Vector = function(x, y, z = 0) {
     try {
 
         validateXY(x, y);
-    } catch(e) {
+    } catch (e) {
         console.log("Exception: " + e);
     }
 
@@ -53,38 +53,45 @@ Vector.prototype.dist = function(that) {
 /**
  * Adds a vector to this vector.
  * 
- * @param {Vector} 
- * @throws {[exceptionType]} If [this condition is met]
+ * @param {Vector} The vector added to this vector.
+ * @throws exception if other is not a {Vector}.
  */
 Vector.prototype.add = function(other) {
     validateVector(other);
+
     this.set(this.x + other.x, this.y + other.y, this.z + other.z);
 }
 
 /**
  * Subtracts a vector from this vector.
- * @param  {[type]} other [description]
- * @return {[type]}       [description]
+ * 
+ * @param {Vector} The vector subtracted from this vector.
+ * @throws exception if other is not a {Vector}.
  */
+
 Vector.prototype.sub = function(other) {
     validateVector(other);
+
     this.set(this.x - other.x, this.y - other.y, this.z - other.z);
 }
 
 /**
  * Returns the dot product between this and 
  * another vector.
- * @param  {[type]} other [description]
- * @return {[type]}       [description]
+ * 
+ * @param  {Vector} A vector used to calculate the dot pruct with this vector.
+ * @return The scalar dot product.
  */
 Vector.prototype.dot = function(other) {
+    validateVector(other);
+
     return (this.x * other.x) + (this.y * other.y) + (this.z * other.z);
 }
 
 /**
  * Returns the magnitude of the vector.
  * 
- * @return {[type]} [description]
+ * @return The scalar magnitude of this vector.
  */
 Vector.prototype.mag = function() {
     return Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
@@ -92,8 +99,9 @@ Vector.prototype.mag = function() {
 
 /**
  * Rotates this vector.
- * @param  {[type]} angle [description]
- * @return {[type]}       [description]
+ * 
+ * @param  The angle to rotate.
+ * @return {Vector} This vector after the rotation (useful for chaining).
  */
 Vector.prototype.rotate = function(angle) {
     // x' = x * cos(angle) - y * sin(angle);
@@ -109,8 +117,9 @@ Vector.prototype.rotate = function(angle) {
 }
 
 /**
- * Sets this 
- * @return {[type]} [description]
+ * Normalizes this vector (turning it into a unit vector).
+ * 
+ * @return {Vector} This vector after the operation (useful for chaining).
  */
 Vector.prototype.normalize = function() {
     var mag = this.mag();
@@ -124,7 +133,7 @@ Vector.prototype.normalize = function() {
 /**
  * Returns a copy of this vector.
  * 
- * @return A copy of this 
+ * @return {Vector} A copy of this 
  */
 Vector.prototype.get = function() {
     return new Vector(this.x, this.y, this.z);
@@ -133,19 +142,33 @@ Vector.prototype.get = function() {
 /**
  * Multiply this vector by a scalar.
  * 
- * @param  {[type]} scalar [description]
- * @return {[type]}        [description]
+ * @param  A scalar to multiply this vector by.
+ * @return {Vector} This vector after the multiplication.
  */
 Vector.prototype.mult = function(scalar) {
     this.set(this.x * scalar, this.y * scalar, this.z * scalar);
+
+    return this;
 }
 
 /**
- * Sets this vector components.
+ * Divide this vector by a scalar.
  * 
- * @param {[type]} x [description]
- * @param {[type]} y [description]
- * @param {Number} z [description]
+ * @param  A scalar to divide this vector by.
+ * @return {Vector} This vector after the operation.
+ */
+Vector.prototype.div = function(scalar) {
+    this.set(this.x / scalar, this.y / scalar, this.z / scalar);
+
+    return this;
+}
+
+/**
+ * Sets this vector's components.
+ *
+ * @param {scalar} The x component.
+ * @param {scalar} The y component.
+ * @param {scalar} The z component.
  */
 Vector.prototype.set = function(x, y, z = 0) {
     this.x = x;
@@ -166,19 +189,30 @@ Vector.prototype.set = function(x, y, z = 0) {
 /**
  * Sets the limit magnitude for the vector.
  * 
- * @param {[type]} limit [description]
+ * @param {scalar} The new limit for this vector.
  */
 Vector.prototype.setLimit = function(limit) {
     if (!(this.limit > limit))
         this.limit = limit;
 }
 
+/**
+ * Prints the vector to console i.e., "[2, 4, 5]"
+ */
 Vector.prototype.print = function() {
-    console.log("(" + this.x + ", " + this.y + ", " + this.z + ")");
+    console.log("[" + this.x + ", " + this.y + ", " + this.z + "]");
 }
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++ S T A T I C   F U N C T I O N S +++++++++++++++++++++++++++++++
 
+/**
+ * Subtracts two vectors.
+ * 
+ * @param  {Vector} v1 The vector to subtract from.
+ * @param  {Vector} v2 The vector to subtract.
+ * @return {Vector} The result of the subtraction.  
+ */
 Vector.sub = function(v1, v2) {
     validateNumArgs(2, arguments);
     validateVector(v1);
@@ -188,68 +222,88 @@ Vector.sub = function(v1, v2) {
 }
 
 /**
- * Returns a normalized vector from the vector passed in.
- * @param  {[type]} v [description]
- * @return {[type]}   [description]
+ * Returns a normalized vector from the vector passed in and does not change the vector passed in.
+ *
+ * @param  {Vector} The vector to normalize.
+ * @return {Vector} The normalized vector.
+ * @throws exception if the magnitude is less than 1
  */
 Vector.getUnitVector = function(v) {
     validateVector(v);
 
-    var mag = v.mag();
-    if (mag == 0)
-        throw "The magnitude of your vector is zero.";
+    // var mag = v.mag();
+    // if (mag == 0)
+    //     throw "The magnitude of your vector is zero.";
 
-    console.log("updated yo");
+    // // console.log("updated yo");
 
-    var x = v.x / mag;
-    var y = v.y / mag;
-    var z = v.z / mag;
-    var normalV = new Vector(x, y, z)
+    // var x = v.x / mag;
+    // var y = v.y / mag;
+    // var z = v.z / mag;
+    // var normalV = new Vector(x, y, z)
 
-    console.log(normalV);
+    // console.log(normalV);
 
-    return normalV;
+    // return normalV;
+    // 
+    // 
+    var normal = v.get();
+    return normal.normalize();
 }
 
 /**
  * Multiplies a vector by a scalar and returns the result as a new Vector object.
  * 
- * @param  {[type]} v      [description]
- * @param  {[type]} scalar [description]
- * @return {[type]}        [description]
+ * @param  {Vector} The vector to perform scalar multiplication on.
+ * @param  {scalar} The scalar multiple.
+ * @return {Vector} The result of the scalar multiplication.
  */
 Vector.mult = function(v, scalar) {
     validateNumArgs(2, arguments);
     validateVector(v);
 
-    var x = v.x;
-    var y = v.y;
-    var z = v.z;
+    // OLD
+    // var x = v.x;
+    // var y = v.y;
+    // var z = v.z;
 
-    return new Vector(x * scalar, y * scalar, z * scalar);
+    // return new Vector(x * scalar, y * scalar, z * scalar);
+
+
+    // UPDATED
+    var scalarMultiple = v.get();
+    return scalarMultiple.mult(scalar);
 }
 
 /**
  * Divides the passed vector by the passed scalar.
- * @param  {[type]} v1     [description]
- * @param  {[type]} scalar [description]
- * @return {[type]}        [description]
+ * 
+ * @param  {Vector} The vector to perform scalar division on.
+ * @param  {scalar} The scalar multiple.
+ * @return {Vector} The result of the scalar division.
  */
 Vector.div = function(v, scalar) {
     validateArgIsNotZero(scalar);
     validateVector(v1);
     validateNumArgs(2, arguments);
 
-    var x = v.x;
-    var y = v.y;
-    var z = v.z;
-    return new Vector(x / scalar, y / scalar, z / scalar);
+    // OLD
+    // var x = v.x;
+    // var y = v.y;
+    // var z = v.z;
+    // return new Vector(x / scalar, y / scalar, z / scalar);
+
+    // UPDATED
+    var scalarMultiple = v.get();
+    return scalarMultiple.div(scalar);
 }
 
 /**
  * Takes to Vector objects and ands them.
- * @param {[type]} v1 [A vector object]
- * @param {[type]} v2 [A vector object]
+ * 
+ * @param {Vector} v1 The first vector to add.
+ * @param {Vector} v2 The second vector to add.
+ * @return {Vector} The vector result of the operation.
  */
 Vector.add = function(v1, v2) {
     validateVector(v1);
@@ -264,14 +318,16 @@ Vector.add = function(v1, v2) {
  * Calculates and returns the angle between two 
  * vectors and returns the value in
  * radians
- * @param  {[type]} v1 [description]
- * @param  {[type]} v2 [description]
- * @return {[type]}    [description]
+ *
+ * @param {Vector} v1 The first vector.
+ * @param {Vector} v2 The second vector.
+ * @return {scalar} The angle between the two vectors.
  */
 Vector.angleBetween = function(v1, v2) {
     /*
      * ø = arccos(v•v2 / |v|•|v2|)
      */
+    
     // v dotted with v2
     var dot = v1.dot(v2);
 
