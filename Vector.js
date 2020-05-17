@@ -1,13 +1,16 @@
 /**
- * A Vector API that facilitates vector operations.
+ * A three demensional vector API. Supplies all the vector operations. 
  *
  * @version 2.0
  * @author Jorge Jimenez
  */
-
 var Vector = function(x, y, z = 0) {
+    try {
 
-    validateXY(x, y);
+        validateXY(x, y);
+    } catch(e) {
+        console.log("Exception: " + e);
+    }
 
     this.x = x;
     this.y = y;
@@ -16,9 +19,10 @@ var Vector = function(x, y, z = 0) {
 }
 
 /**
- * [Calculates the cross product of two Vector objects and returns a new Vector
+ * Calculates the cross product of two Vector objects and returns a new Vector
  * composed of the result.
- * @return {[type]} [description]
+ * 
+ * @return {Vector} The resutlt of the crossing this vector with another vector.
  */
 Vector.prototype.cross = function(v) {
     validateVector(v);
@@ -35,18 +39,22 @@ Vector.prototype.cross = function(v) {
 
 /**
  * Calculates the distance between this and another vector.
- * @param  {[type]} other [description]
- * @return {[type]}       [description]
+ * 
+ * @param  {Vector} The distance from this to that vector.
+ * @return {Integer} The scalar distance from this to that vector.
  */
-Vector.prototype.dist = function(other) {
-    validateVector(other);
-    var v = Vector.sub(this, other);
+Vector.prototype.dist = function(that) {
+    validateVector(that);
+
+    var v = Vector.sub(this, that);
     return v.mag();
 }
 
 /**
  * Adds a vector to this vector.
- * @param {[type]} other [description]
+ * 
+ * @param {Vector} 
+ * @throws {[exceptionType]} If [this condition is met]
  */
 Vector.prototype.add = function(other) {
     validateVector(other);
@@ -113,14 +121,32 @@ Vector.prototype.normalize = function() {
     return this;
 }
 
+/**
+ * Returns a copy of this vector.
+ * 
+ * @return A copy of this 
+ */
 Vector.prototype.get = function() {
     return new Vector(this.x, this.y, this.z);
 }
 
+/**
+ * Multiply this vector by a scalar.
+ * 
+ * @param  {[type]} scalar [description]
+ * @return {[type]}        [description]
+ */
 Vector.prototype.mult = function(scalar) {
     this.set(this.x * scalar, this.y * scalar, this.z * scalar);
 }
 
+/**
+ * Sets this vector components.
+ * 
+ * @param {[type]} x [description]
+ * @param {[type]} y [description]
+ * @param {Number} z [description]
+ */
 Vector.prototype.set = function(x, y, z = 0) {
     this.x = x;
     this.y = y;
@@ -137,6 +163,11 @@ Vector.prototype.set = function(x, y, z = 0) {
     return this;
 }
 
+/**
+ * Sets the limit magnitude for the vector.
+ * 
+ * @param {[type]} limit [description]
+ */
 Vector.prototype.setLimit = function(limit) {
     if (!(this.limit > limit))
         this.limit = limit;
