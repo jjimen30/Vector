@@ -1,5 +1,5 @@
 /**
- * A three demensional vector API. Represented as a row vector, it supplies all the vector operations. 
+ * A three demensional vector API. Represented as a row vector, it provides all the vector operations. 
  *
  * @version v12.10.0
  * @author Jorge Jimenez
@@ -187,6 +187,17 @@ Vector.prototype.set = function(x, y, z = 0) {
 }
 
 /**
+ * Sets the magnitude of this vector.
+ *
+ * @param {scalar} mag The magnitude to set this vector to.
+ * @return {Vector} This vector after the operation.
+ */
+Vector.prototype.setMag = function(mag) {
+    this.set(this.x * mag, this.y * mag, this.z * mag);
+    return this;
+}
+
+/**
  * Sets the limit magnitude for the vector.
  * 
  * @param {scalar} The new limit for this vector.
@@ -327,7 +338,7 @@ Vector.angleBetween = function(v1, v2) {
     /*
      * ø = arccos(v•v2 / |v|•|v2|)
      */
-    
+
     // v dotted with v2
     var dot = v1.dot(v2);
 
