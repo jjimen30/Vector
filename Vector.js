@@ -22,7 +22,8 @@ var Vector = function(x, y, z = 0) {
 /**
  * Calculates the cross product of two Vector objects and returns a new Vector
  * composed of the result.
- * 
+ *
+ * @param {Vector} v The vector to cross with this vector.
  * @return {Vector} The resutlt of the crossing this vector with another vector.
  */
 Vector.prototype.cross = function(v) {
@@ -41,7 +42,7 @@ Vector.prototype.cross = function(v) {
 /**
  * Calculates the distance between this and another vector.
  * 
- * @param  {Vector} The distance from this to that vector.
+ * @param  {Vector} that The distance from this to that vector.
  * @return {Integer} The scalar distance from this to that vector.
  */
 Vector.prototype.dist = function(that) {
@@ -54,7 +55,7 @@ Vector.prototype.dist = function(that) {
 /**
  * Adds a vector to this vector.
  * 
- * @param {Vector} The vector added to this vector.
+ * @param {Vector} other The vector added to this vector.
  * @throws exception if other is not a {Vector}.
  */
 Vector.prototype.add = function(other) {
@@ -66,7 +67,7 @@ Vector.prototype.add = function(other) {
 /**
  * Subtracts a vector from this vector.
  * 
- * @param {Vector} The vector subtracted from this vector.
+ * @param {Vector} other The vector subtracted from this vector.
  * @throws exception if other is not a {Vector}.
  */
 
@@ -80,7 +81,7 @@ Vector.prototype.sub = function(other) {
  * Returns the dot product between this and 
  * another vector.
  * 
- * @param  {Vector} A vector used to calculate the dot pruct with this vector.
+ * @param  {Vector} other A vector used to calculate the dot pruct with this vector.
  * @return The scalar dot product.
  */
 Vector.prototype.dot = function(other) {
@@ -101,7 +102,7 @@ Vector.prototype.mag = function() {
 /**
  * Rotates this vector.
  * 
- * @param  The angle to rotate.
+ * @param {number} angle The angle to rotate.
  * @return {Vector} This vector after the rotation (useful for chaining).
  */
 Vector.prototype.rotate = function(angle) {
@@ -143,7 +144,7 @@ Vector.prototype.get = function() {
 /**
  * Multiply this vector by a scalar.
  * 
- * @param  A scalar to multiply this vector by.
+ * @param  {number} scalar A scalar to multiply this vector by.
  * @return {Vector} This vector after the multiplication.
  */
 Vector.prototype.mult = function(scalar) {
@@ -155,7 +156,7 @@ Vector.prototype.mult = function(scalar) {
 /**
  * Divide this vector by a scalar.
  * 
- * @param  A scalar to divide this vector by.
+ * @param  {number} scalar A scalar to divide this vector by.
  * @return {Vector} This vector after the operation.
  */
 Vector.prototype.div = function(scalar) {
@@ -167,9 +168,9 @@ Vector.prototype.div = function(scalar) {
 /**
  * Sets this vector's components.
  *
- * @param {scalar} The x component.
- * @param {scalar} The y component.
- * @param {scalar} The z component.
+ * @param {scalar} x The x component.
+ * @param {scalar} y The y component.
+ * @param {scalar} z The z component.
  */
 Vector.prototype.set = function(x, y, z = 0) {
     this.x = x;
@@ -201,7 +202,7 @@ Vector.prototype.setMag = function(mag) {
 /**
  * Sets the limit magnitude for the vector.
  * 
- * @param {scalar} The new limit for this vector.
+ * @param {scalar} limit The new limit for this vector.
  */
 Vector.prototype.setLimit = function(limit) {
     if (!(this.limit > limit))
@@ -236,7 +237,7 @@ Vector.sub = function(v1, v2) {
 /**
  * Returns a normalized vector from the vector passed in and does not change the vector passed in.
  *
- * @param  {Vector} The vector to normalize.
+ * @param  {Vector} v The vector to normalize.
  * @return {Vector} The normalized vector.
  * @throws exception if the magnitude is less than 1
  */
@@ -266,8 +267,8 @@ Vector.getUnitVector = function(v) {
 /**
  * Multiplies a vector by a scalar and returns the result as a new Vector object.
  * 
- * @param  {Vector} The vector to perform scalar multiplication on.
- * @param  {scalar} The scalar multiple.
+ * @param  {Vector} v The vector to perform scalar multiplication on.
+ * @param  {scalar} scalar The scalar multiple.
  * @return {Vector} The result of the scalar multiplication.
  */
 Vector.mult = function(v, scalar) {
@@ -290,8 +291,8 @@ Vector.mult = function(v, scalar) {
 /**
  * Divides the passed vector by the passed scalar.
  * 
- * @param  {Vector} The vector to perform scalar division on.
- * @param  {scalar} The scalar multiple.
+ * @param  {Vector} v The vector to perform scalar division on.
+ * @param  {scalar} scalar The scalar multiple.
  * @return {Vector} The result of the scalar division.
  */
 Vector.div = function(v, scalar) {
