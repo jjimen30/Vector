@@ -1,7 +1,7 @@
 /**
  * A three demensional vector API. Supplies all the vector operations. 
  *
- * @version 2.0
+ * @version v12.10.0
  * @author Jorge Jimenez
  */
 var Vector = function(x, y, z = 0) {
