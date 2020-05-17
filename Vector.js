@@ -1,6 +1,7 @@
 /**
  * A three demensional vector API. Represented as a row vector, it provides all the vector operations. 
  *
+ * @class
  * @version v12.10.0
  * @author Jorge Jimenez
  */
