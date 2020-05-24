@@ -102,7 +102,7 @@ Vector.prototype.mag = function() {
 /**
  * Rotates this vector.
  * 
- * @param {number} angle The angle to rotate.
+ * @param {number} angle The angle in radians to rotate the vector.
  * @return {Vector} This vector after the rotation (useful for chaining).
  */
 Vector.prototype.rotate = function(angle) {
@@ -187,6 +187,7 @@ Vector.prototype.set = function(x, y, z = 0) {
 
     return this;
 }
+
 
 /**
  * Sets the magnitude of this vector.
