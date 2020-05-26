@@ -69,12 +69,14 @@ Vector.prototype.add = function(other) {
  * 
  * @param {Vector} other The vector subtracted from this vector.
  * @throws exception if other is not a {Vector}.
+ * @return {Vector} This vector after the subtraction.
  */
 
 Vector.prototype.sub = function(other) {
     validateVector(other);
 
     this.set(this.x - other.x, this.y - other.y, this.z - other.z);
+    return this;
 }
 
 /**
@@ -364,7 +366,8 @@ Vector.angleBetween = function(v1, v2) {
  * @return {number} The scalar distance between the two vectors.
  */
 Vector.distance = function(v1, v2) {
-    var dif = v1.sub(v2);
+
+    var dif = Vector.sub(v1, v2);
     return dif.mag();
 }
 
