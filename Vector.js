@@ -354,6 +354,19 @@ Vector.angleBetween = function(v1, v2) {
     return Math.acos(result);
 }
 
+/**
+ * Calculate the distance between two vectors. The order of the 
+ * vector does not matter. And it will always return a positive number.
+ *
+ * [Derived here]{@link http://mathonline.wikidot.com/the-distance-between-two-vectors}
+ * @param {Vector} v1 The distance from this vector.
+ * @param {Vector} v2 The distance to this vector.
+ * @return {number} The scalar distance between the two vectors.
+ */
+Vector.distance = function(v1, v2) {
+    var dif = v1.sub(v2);
+    return dif.mag();
+}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++ E X C E P T I O N S   H E L P E R S ++++++++++++++++++++++++++++++
